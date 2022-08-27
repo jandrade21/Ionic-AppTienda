@@ -1,14 +1,14 @@
 <ion-app>
   <ion-split-pane contentId="main">
     <!--  the side menu  -->
-    <ion-menu contentId="main">
+    <ion-menu contentId="main" menuId="custom">
       <ion-header>
         <ion-toolbar>
           <ion-title class="subtitulo">Menu</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
-        <ion-menu-toggle>
+        <ion-menu-toggle autoHide="false">
           <ion-item button="true" detail="true" [routerLink]="['/set-productos']">
             <ion-label class="normal">
               Configuración de productos
