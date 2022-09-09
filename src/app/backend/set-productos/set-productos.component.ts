@@ -1,3 +1,4 @@
+import { FirestorageService } from './../../services/firestorage.service';
 import { Component, OnInit } from '@angular/core';
 import { AlertController, LoadingController, MenuController, ToastController } from '@ionic/angular';
 import { Producto } from 'src/app/models';
@@ -18,9 +19,11 @@ export class SetProductosComponent implements OnInit {
  private path ='Productos/';
 
  loading: any;
+ newImage = '';
+ newFile = '';
 
   constructor(public menucontroler:MenuController, public firestoreService:FirestoreService, public LoandingController: LoadingController,
-    public toastController: ToastController,private alertController: AlertController) { }
+    public toastController: ToastController,private alertController: AlertController, public firestorageService:FirestorageService) { }
 
   ngOnInit() {
     this.getProdutos();
@@ -29,8 +32,12 @@ export class SetProductosComponent implements OnInit {
   openMenu(){
     this.menucontroler.toggle('custom')
   }
-  guardarProducto(){
+  async guardarProducto(){
     this.presentLoading();
+    const path = 'Productos';
+    const name = this.newProducto.nombre;
+    const res = await this.firestorageService.uploadImage(this.newFile, path, name);
+    this.newProducto.foto = res;
     this.firestoreService.createDoc(this.newProducto,this.path,this.newProducto.id).then(res=>{
       this.loading.dismiss();
       this.presentToast('guardado con exito','success','checkmark')
@@ -105,6 +112,17 @@ export class SetProductosComponent implements OnInit {
       icon: icono,
     });
     toast.present();
+  }
+
+  async newImageUpload(event: any){
+     if(event.target.files && event.target.files[0]){
+      this.newFile = event.target.files[0];
+       const reader = new FileReader();
+       reader.onload = ((image)=>{
+         this.newProducto.foto = image.target.result as string;
+      });
+       reader.readAsDataURL(event.target.files[0]);
+     }
   }
 
 }

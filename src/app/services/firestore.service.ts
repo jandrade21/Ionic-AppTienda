@@ -13,8 +13,8 @@ export class FirestoreService {
     return collection.doc(id).set(data);
   }
 
-  getDoc(path:string, id:string){
-    const collection = this.database.collection(path);
+  getDoc<tipo>(path: string, id:string){
+    const collection = this.database.collection<tipo>(path);
     return collection.doc(id).valueChanges();
   }
 
@@ -31,6 +31,11 @@ export class FirestoreService {
   }
   getCollection<tipo>(path:string){
     const collection = this.database.collection<tipo>(path);
+    return collection.valueChanges();
+  }
+  getCollectionQuery<tipo>(path:string, parametro: string, condicion:any, busqueda: string){
+    const collection = this.database.collection<tipo>(path, 
+       ref => ref.where(parametro, condicion, busqueda));
     return collection.valueChanges();
   }
 }

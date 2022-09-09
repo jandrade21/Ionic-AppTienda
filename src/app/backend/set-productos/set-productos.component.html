@@ -5,7 +5,7 @@
     </ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="openMenu()">
-        <ion-icon color="primary" slot="icon-only" name="menu-sharp"></ion-icon>
+        <ion-icon  slot="icon-only" name="menu-sharp"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -13,17 +13,15 @@
 <ion-content>
 
   <div class="nuevo">
-    <ion-button (click)="nuevo()" class="normal" color="dark">nuevo</ion-button>
+    <ion-button (click)="nuevo()" class="normal" shape="round" color="dark">nuevo</ion-button>
   </div>
 
   <div *ngIf="enableNewProducto">
-      <ion-item>
-          <ion-buttons slot="end">
-            <ion-button (click)="enableNewProducto = false;">
-              <ion-icon slot="icon-only" name="close"></ion-icon>
-            </ion-button>
-          </ion-buttons>
-      </ion-item>
+      <div class="normal centrar">
+          <ion-button (click)="enableNewProducto = false;" shape="round" color="dark">
+            Cerrar
+          </ion-button>
+      </div>
       <h3 class="subtitulo p-3 encabezado">Ingrese datos del producto</h3>
         <ion-item>
           <ion-label class="normal"position="floating">
@@ -52,23 +50,32 @@
           </ion-label>
             <ion-buttons slot="end">
               <ion-button>
+                <label for="file-upload">
                   <ion-icon slot="icon-only" name="images"></ion-icon>
+                </label>
+                <input (change)="newImageUpload($event)" type="file" id="file-upload" style="display:none" accept="image/*">  
                 </ion-button>
               </ion-buttons>
         </ion-item>
-        <ion-button class="boton-guardar" expand="block" color="dark" (click)="guardarProducto()">Guardar</ion-button>
+        <ion-item>
+          <img class="image" [src]="newProducto.foto" alt="">
+        </ion-item>
+        <ion-button class="boton-guardar" shape="round" expand="full" color="dark" (click)="guardarProducto()">Guardar</ion-button>
   </div>
 
-    
-    <ion-item *ngFor="let producto of productos">
-      <ion-label class="normal">{{producto.nombre}}</ion-label>
-      <ion-buttons slot="end">
-        <ion-button (click)="newProducto = producto; enableNewProducto=true;">
-          <ion-icon slot="icon-only" name="create-sharp"></ion-icon>
-        </ion-button>
-        <ion-button (click)="deleteProducto(producto)">
-          <ion-icon slot="icon-only" color="danger" name="trash-bin"></ion-icon>
-        </ion-button>
-      </ion-buttons>
-    </ion-item>
+<ion-card name="card">
+  <h3 class="subtitulo p-3 encabezado">Lista de productos</h3>
+  <ion-item *ngFor="let producto of productos">
+    <ion-label class="normal">{{producto.nombre}}</ion-label>
+    <ion-buttons slot="end">
+      <ion-button (click)="newProducto = producto; enableNewProducto=true;">
+        <ion-icon slot="icon-only" name="create-sharp"></ion-icon>
+      </ion-button>
+      <ion-button (click)="deleteProducto(producto)">
+        <ion-icon slot="icon-only" color="danger" name="trash-bin"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-item>
+</ion-card>    
+
   </ion-content>
