@@ -38,4 +38,16 @@ export class FirestoreService {
        ref => ref.where(parametro, condicion, busqueda));
     return collection.valueChanges();
   }
+  getCollectionAll<tipo>(path, parametro: string, condicion: any, busqueda: string, startAt: any){
+    if(startAt == null){
+      startAt =new Date();
+    }
+    const collection = this.database.collectionGroup<tipo>(path, ref =>
+      ref.where(parametro,condicion,busqueda)
+         .orderBy('fecha', 'desc')
+         .limit(5)
+         .startAfter(startAt)
+         );
+      return collection.valueChanges(); 
+  }
 }

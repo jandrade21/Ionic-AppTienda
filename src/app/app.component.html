@@ -4,7 +4,7 @@
     <ion-menu contentId="main" menuId="custom">
       <ion-header>
         <ion-toolbar>
-          <ion-title class="subtitulo">Menu</ion-title>
+          <ion-title class="subtitulo">Hola {{cliente.nombre}}</ion-title>
         </ion-toolbar>
       </ion-header>
       <ion-content>
@@ -26,7 +26,7 @@
           </ion-item>
         </ion-menu-toggle>
 
-        <ion-menu-toggle autoHide="false"*ngIf="admin">
+        <ion-menu-toggle autoHide="false" *ngIf="admin">
           <ion-item button="true" detail="true" [routerLink]="['/set-productos']">
             <ion-label class="normal">
               Configuración de productos
@@ -35,12 +35,21 @@
           </ion-item>
         </ion-menu-toggle>
 
-        <ion-menu-toggle autoHide="false">
+        <ion-menu-toggle autoHide="false"*ngIf="!admin">
           <ion-item button="true" detail="true" [routerLink]="['/mis-pedidos']">
             <ion-label class="normal">
               Mis pedidos
             </ion-label>
             <ion-icon slot="start" name="reader-sharp"></ion-icon>
+          </ion-item>
+        </ion-menu-toggle>
+
+        <ion-menu-toggle autoHide="false"*ngIf="admin">
+          <ion-item button="true" detail="true" [routerLink]="['/pedidos']">
+            <ion-label class="normal">
+              Pedidos
+            </ion-label>
+            <ion-icon slot="start" name="archive-sharp"></ion-icon>
           </ion-item>
         </ion-menu-toggle>
 

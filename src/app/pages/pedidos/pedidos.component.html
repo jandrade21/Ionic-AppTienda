@@ -1,11 +1,11 @@
 <ion-header>
   <ion-toolbar>
     <ion-title class="subtitulo ion-text-wrap">
-      Mis pedidos
+      pedidos
     </ion-title>
     <ion-buttons slot="start">
       <ion-button (click)="openMenu()">
-        <ion-icon slot="icon-only" name="menu-sharp"></ion-icon>
+        <ion-icon slot="icon-only" name="m++enu-sharp"></ion-icon>
       </ion-button>
     </ion-buttons>
 
@@ -34,6 +34,7 @@
     </ion-segment>
   </div>
  
+<div  *ngIf="nuevos">
   <ion-card *ngFor="let pedido of pedidos">
     <ion-item>
       <ion-label class="normal">
@@ -45,4 +46,23 @@
     </ion-item>
     <app-itemcarrito *ngFor="let producto of pedido.productos" [productoPedido]="producto" [botones]=false></app-itemcarrito>
   </ion-card>
+</div>
+
+<div *ngIf="!nuevos">
+  <ion-card *ngFor="let pedido of pedidosEntregados">
+    <ion-item>
+      <ion-label class="normal">
+        Estado:{{pedido.estado}}
+        <p>
+          Fecha: {{pedido.fecha.seconds*1000|date:'dd/MM/yyy'}}
+        </p> 
+      </ion-label>
+    </ion-item>
+    <app-itemcarrito *ngFor="let producto of pedido.productos" [productoPedido]="producto" [botones]=false></app-itemcarrito>
+  </ion-card>
+</div>
+<div class="centrar">
+  <ion-button class="normal" color="dark" shape="round" (click)="cargarMas()">Cargar más</ion-button>
+</div>
+
 </ion-content>

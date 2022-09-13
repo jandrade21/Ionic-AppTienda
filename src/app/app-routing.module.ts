@@ -1,3 +1,4 @@
+import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { MispedidosComponent } from './pages/mispedidos/mispedidos.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
 import { PerfilComponent } from './pages/perfil/perfil.component';
@@ -8,32 +9,16 @@ import { HomeComponent } from './pages/home/home.component';
 import { map } from 'rxjs/operators';
 import { canActivate } from '@angular/fire/auth-guard';
 
-// const isAdmin = (next: any)=> map ( (user:any) => !!user && 'sLT7GQUso4XeLz4xdnqx2yVajRf1' === user.uid);
+// const isadmin =  'sLT7GQUso4XeLz4xdnqx2yVajRf1'
+// const onlyAdmin = () => map ( (user:any) => !!user && ('sLT7GQUso4XeLz4xdnqx2yVajRf1' === user.uid));
 const routes: Routes = [
-  {
-    path: 'home',
-    component:HomeComponent
-  },
-  {
-    path: 'set-productos',
-    component:SetProductosComponent, 
-  },
-  {
-    path: 'mis-pedidos',
-    component:MispedidosComponent
-  },
-  {
-    path: 'carrito',
-    component:CarritoComponent
-  },
-  {
-    path: 'perfil',
-    component:PerfilComponent
-  },
-  {
-    path: '',
-    component:HomeComponent
-  },
+  {path: 'home',component:HomeComponent},
+  {path: 'set-productos',component:SetProductosComponent}, //...canActivate(onlyAdmin )},
+  {path: 'pedidos',component:PedidosComponent},
+  {path: 'mis-pedidos',component:MispedidosComponent},
+  {path: 'carrito',component:CarritoComponent},
+  {path: 'perfil',component:PerfilComponent},
+  {path: '',component:HomeComponent},
   {
     path: '**',
     redirectTo: 'home',

@@ -1,3 +1,4 @@
+import { PedidosComponent } from './pedidos/pedidos.component';
 import { MispedidosComponent } from './mispedidos/mispedidos.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ComponentsModule } from './../components/components.module';
@@ -17,6 +18,7 @@ import { HomeComponent } from './home/home.component';
     PerfilComponent,
     CarritoComponent,
     MispedidosComponent,
+    PedidosComponent
   ],
   imports: [
     CommonModule,
