@@ -13,6 +13,7 @@ import { AngularFireModule } from '@angular/fire/compat';
 import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
+import { ServiceWorkerModule } from '@angular/service-worker';
 
 
 
@@ -25,10 +26,10 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
   BackendModule,
   AppRoutingModule,
   AngularFireModule.initializeApp(environment.firebaseConfig),
-  AngularFirestoreModule,
+  AngularFirestoreModule.enablePersistence(),
   AngularFireStorageModule,
-  AngularFireAuthModule
-  
+  AngularFireAuthModule,
+  ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

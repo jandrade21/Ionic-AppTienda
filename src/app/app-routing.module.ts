@@ -18,10 +18,10 @@ const routes: Routes = [
   {path: 'mis-pedidos',component:MispedidosComponent},
   {path: 'carrito',component:CarritoComponent},
   {path: 'perfil',component:PerfilComponent},
-  {path: '',component:HomeComponent},
+  {path: 'perfil',component:HomeComponent},
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: 'perfil',
     pathMatch: 'full'
   },
 ];

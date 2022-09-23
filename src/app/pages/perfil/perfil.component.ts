@@ -17,6 +17,8 @@ export class PerfilComponent implements OnInit {
     uid: '',
     email: '',
     nombre:'',
+    apellido:'',
+    password:'',
     celular: '',
     foto: '',
     referencia: '',
@@ -26,13 +28,15 @@ export class PerfilComponent implements OnInit {
   uid = '';
   subscriberUserInfo: Subscription;
   ingresarEnable= false;
+  passwordType: string = 'password';
+  paswordShow: boolean = false;
+
   constructor(
     public menucontroller:MenuController, 
     public firebaseauthservice:FirebaseauthService,
     public firestoreService:FirestoreService,
     public firestorageService: FirestorageService,
     ) {
-      
       this.firebaseauthservice.stateAuth().subscribe(res =>{
        
          if (res !== null){
@@ -47,6 +51,7 @@ export class PerfilComponent implements OnInit {
   async ngOnInit() {
     const uid = await this.firebaseauthservice.getUid();
     console.log(uid);
+    this.ingresarEnable = true;
   }
 
   initCliente(){
@@ -55,6 +60,8 @@ export class PerfilComponent implements OnInit {
       uid: '',
       email: '',
       nombre:'',
+      apellido: '',
+      password:'',
       celular: '',
       foto: '',
       referencia: '',
@@ -78,7 +85,7 @@ export class PerfilComponent implements OnInit {
  async registrarse(){
   const  credenciales ={
     email: this.cliente.email,
-    password: this.cliente.celular,
+    password: this.cliente.password,
   };
   const res = await this.firebaseauthservice.registrar(credenciales.email, credenciales.password).catch( err =>{
     console.log('error->', err)
@@ -118,10 +125,19 @@ async guardarUser(){
   ingresar(){
     const  credenciales ={
       email: this.cliente.email,
-      password: this.cliente.celular,
+      password: this.cliente.password,
     }
     this.firebaseauthservice.login(credenciales.email, credenciales.password).then(res =>{
       console.log('ingreso con exito')
     })
+  }
+  togglePassword(){
+    if(this.paswordShow){
+      this.paswordShow = false;
+      this.passwordType = 'password';
+    } else{
+      this.paswordShow = true;
+      this.passwordType = 'text';
+    }
   }
 }

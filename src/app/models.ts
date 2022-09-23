@@ -12,6 +12,8 @@ export interface Cliente {
     uid: string;
     email: string;
     nombre: string;
+    apellido: string;
+    password: string;
     celular: string;
     foto: string;
     referencia: string;

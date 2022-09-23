@@ -1,4 +1,4 @@
-<ion-header>
+<ion-header *ngIf="uid.length" >
   <ion-toolbar>
     <ion-title class="subtitulo ion-text-wrap">
       Perfil
@@ -11,26 +11,41 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
+      <div  class="centrar">
+        <img src="assets/imagen/logo.png" alt="logo">
+      </div>
       <div *ngIf="!uid.length" >
-        <h3 class="subtitulo p-3 encabezado">Ingrese tus datos</h3>
+        <!-- <h3 class="subtitulo p-3 encabezado">Ingrese tus datos</h3> -->
         <ion-item>
           <ion-label class="normal"position="floating">
             Email
           </ion-label>
+          <ion-icon slot="start" name="mail"></ion-icon>
             <ion-input [(ngModel)]="cliente.email" class="normal" type="string" inputmode="text" name="email">
             </ion-input>
         </ion-item>
         <ion-item  *ngIf="!ingresarEnable">
           <ion-label class="normal"position="floating">
-            Nombre
+            Apellido y Nombre
           </ion-label>
+          <ion-icon slot="start" name="person-outline"></ion-icon>
             <ion-input [(ngModel)]="cliente.nombre" class="normal" type="string" inputmode="text" name="nombre">
             </ion-input>
         </ion-item>
         <ion-item>
+          <ion-label class="normal"position="floating">
+            Contraseña
+          </ion-label>
+          <ion-icon slot="start" name="key"></ion-icon>
+            <ion-input [(ngModel)]="cliente.password" [type]="passwordType" class="normal" type="password" inputmode="text" name="password">
+            </ion-input>
+            <ion-icon name="eye" (click)="togglePassword()" slot="end" type="button" [name]="paswordShow === true ? 'eye':'eye-off'"></ion-icon>
+        </ion-item>
+        <ion-item *ngIf="!ingresarEnable">
           <ion-label class="normal" position="floating">
             Celular
           </ion-label>
+          <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
             <ion-input [(ngModel)]="cliente.celular" class="normal" type="text" name="celular">
             </ion-input>
         </ion-item>
@@ -38,17 +53,19 @@
             <ion-label class="normal"position="floating">
               Referencia a la ubicación
             </ion-label>
+            <ion-icon slot="start" name="map-outline"></ion-icon>
               <ion-input [(ngModel)]="cliente.referencia" class="normal" type="string" inputmode="text" name="referencia">
               </ion-input>
           </ion-item>
         <ion-item *ngIf="!ingresarEnable">
           <ion-label class="normal">
-            Foto referencial:
+            Foto
           </ion-label>
+          <ion-icon slot="start" name="images"></ion-icon>
             <ion-buttons slot="end">
               <ion-button>
                 <label for="file-upload">
-                  <ion-icon slot="icon-only" name="images"></ion-icon>
+                  <ion-icon slot="icon-only" name="share-outline" type="button"></ion-icon>
                 </label>
                 <input (change)="newImageUpload($event)" type="file" id="file-upload" style="display:none" accept="image/*" name="foto">  
                 </ion-button>
@@ -70,10 +87,10 @@
         <ion-grid>
           <ion-row class="ion-justify-content-center">
             <ion-col class="normal text-center borde" size="6">
-              <ion-button *ngIf="ingresarEnable" (click)="ingresar()" class="boton-guardar" shape="round" expand="full" color="dark" (click)="ingresar()">Login</ion-button> 
+              <ion-button *ngIf="ingresarEnable" (click)="ingresar()" class="boton-guardar" shape="round" expand="full" color="dark" (click)="ingresar()">Ingresar</ion-button> 
             </ion-col>
             <ion-col class="normal text-center" size="6">
-              <ion-button *ngIf="ingresarEnable" (click)="ingresarEnable = false" class="boton-guardar" shape="round" expand="full" color="dark" (click)="registrarse()">O registrarse</ion-button>  
+              <ion-button *ngIf="ingresarEnable" (click)="ingresarEnable = false" class="boton-guardar" shape="round" expand="full" color="dark" (click)="registrarse()">Registrarse</ion-button>  
             </ion-col>
           </ion-row>
         </ion-grid>
@@ -84,34 +101,47 @@
           <ion-label class="normal">
             Email:{{cliente.email}}
           </ion-label>
+          <ion-icon slot="start" name="mail"></ion-icon>
         </ion-item>
         <ion-item>
           <ion-label class="normal"position="floating">
-            Nombre
+            Apellido y Nombre
           </ion-label>
+          <ion-icon slot="start" name="person-outline"></ion-icon>
             <ion-input [(ngModel)]="cliente.nombre" class="normal" type="string" inputmode="text">
             </ion-input>
         </ion-item>
         <ion-item>
           <ion-label class="normal">
-            Celular:{{cliente.celular}}
+            Password:{{cliente.password}}
           </ion-label>
+          <ion-icon slot="start" name="key"></ion-icon>
+        </ion-item>
+        <ion-item>
+          <ion-label class="normal"position="floating">
+            Celular
+          </ion-label>
+          <ion-icon slot="start" name="phone-portrait-outline"></ion-icon>
+            <ion-input [(ngModel)]="cliente.celular" class="normal" type="string" inputmode="text">
+            </ion-input>
         </ion-item>
           <ion-item>
             <ion-label class="normal"position="floating">
               Referencia a la ubicación
             </ion-label>
+            <ion-icon slot="start" name="map-outline"></ion-icon>
               <ion-input [(ngModel)]="cliente.referencia" class="normal" type="string" inputmode="text">
               </ion-input>
           </ion-item>
         <ion-item>
           <ion-label class="normal">
-            Foto referencial:
+            Foto
           </ion-label>
+          <ion-icon slot="start" name="images"></ion-icon>
             <ion-buttons slot="end">
               <ion-button>
                 <label for="file-upload">
-                  <ion-icon slot="icon-only" name="images"></ion-icon>
+                  <ion-icon slot="icon-only" name="share-outline" type="button"></ion-icon>
                 </label>
                 <input (change)="newImageUpload($event)" type="file" id="file-upload" style="display:none" accept="image/*">  
                 </ion-button>
