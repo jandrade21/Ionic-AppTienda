@@ -1,3 +1,4 @@
+import { PeluquerosComponent } from './peluqueros/peluqueros.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SetProductosComponent } from './set-productos/set-productos.component';
@@ -8,7 +9,8 @@ import { FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
-    SetProductosComponent
+    SetProductosComponent,
+    PeluquerosComponent
   ],
   imports: [
     CommonModule, 

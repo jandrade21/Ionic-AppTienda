@@ -27,7 +27,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300&family=Raleway:ital,wght@0,100;0,300;0,500;1,100&display=swap');
 
 ion-content {
-     --background: linear-gradient( #7065ca,#e882fc,#ffacf4);
+     --background: linear-gradient( #7065ca,#e882fc,#ffacf4) !important;
    }
 ion-toolbar{
     --background: #0d3c6a;

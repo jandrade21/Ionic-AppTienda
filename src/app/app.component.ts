@@ -14,6 +14,7 @@ import { Platform } from '@ionic/angular';
 export class AppComponent {
   uid = '';
   admin = false;
+  usuario = false;
   cliente: Cliente = {
     uid: '',
     email: '',
@@ -69,7 +70,7 @@ export class AppComponent {
   getUid(){
     this.firebaseauthService.stateAuth().subscribe( res =>{
       if (res !== null){
-        if (res.uid === 'sLT7GQUso4XeLz4xdnqx2yVajRf1') {
+        if (res.uid === 'utYsBIZ9TcNbiBEhq6niuk9TvJh1') {
           this.admin = true;
         } else {
           this.admin = false;
@@ -88,4 +89,18 @@ export class AppComponent {
       }
     });
   }
+  getUidUser(){
+    this.firebaseauthService.stateAuth().subscribe( res =>{
+      if (res !== null){
+        if (res.uid === '') {
+          this.usuario = false;
+        } else {
+          this.usuario = true;
+        }
+      }else {
+        this.usuario = true;
+      }
+    });
+  }
+
 }

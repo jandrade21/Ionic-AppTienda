@@ -1,3 +1,4 @@
+import { ProfesionalesComponent } from './profesionales/profesionales.component';
 import { ItemcarritoComponent } from './itemcarrito/itemcarrito.component';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -10,7 +11,8 @@ import { CommonModule } from '@angular/common';
 @NgModule({
   declarations: [
     ProductoComponent,
-    ItemcarritoComponent
+    ItemcarritoComponent,
+    ProfesionalesComponent
   ],
   imports: [
     CommonModule,
@@ -20,6 +22,7 @@ import { CommonModule } from '@angular/common';
   exports:[
     ProductoComponent,
     ItemcarritoComponent,
+    ProfesionalesComponent,
   ]
 })
 export class ComponentsModule { }

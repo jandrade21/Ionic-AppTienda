@@ -100,8 +100,7 @@ export class SetProductosComponent implements OnInit {
       message:'guardando',
     });
     await this.loading.present();
-    // await loading.onDidDismiss();
-    // console.log('loading dismissed!');
+
   }
   async presentToast(mensaje:string, color:string, icono:string) {
     const toast = await this.toastController.create({

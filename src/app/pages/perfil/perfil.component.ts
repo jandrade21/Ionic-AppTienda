@@ -2,7 +2,7 @@ import { FirestoreService } from './../../services/firestore.service';
 import { FirestorageService } from './../../services/firestorage.service';
 import { FirebaseauthService } from './../../services/firebaseauth.service';
 import { Cliente } from './../../models';
-import { MenuController } from '@ionic/angular';
+import { MenuController, ToastController } from '@ionic/angular';
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 
@@ -36,6 +36,7 @@ export class PerfilComponent implements OnInit {
     public firebaseauthservice:FirebaseauthService,
     public firestoreService:FirestoreService,
     public firestorageService: FirestorageService,
+    public toastController: ToastController
     ) {
       this.firebaseauthservice.stateAuth().subscribe(res =>{
        
@@ -52,6 +53,17 @@ export class PerfilComponent implements OnInit {
     const uid = await this.firebaseauthservice.getUid();
     console.log(uid);
     this.ingresarEnable = true;
+  }
+  async presentToast(mensaje:string, color:string, icono:string, position: 'top' | 'middle' | 'bottom') {
+    const toast = await this.toastController.create({
+      message: mensaje,
+      cssClass:'normal',
+      duration: 2000,
+      color:color,
+      icon: icono,
+      position:position
+    });
+    toast.present();
   }
 
   initCliente(){
@@ -87,9 +99,9 @@ export class PerfilComponent implements OnInit {
     email: this.cliente.email,
     password: this.cliente.password,
   };
-  const res = await this.firebaseauthservice.registrar(credenciales.email, credenciales.password).catch( err =>{
-    console.log('error->', err)
-  });
+  const res = await this.firebaseauthservice.registrar(credenciales.email, credenciales.password).then(res =>{
+    this.presentToast('Se ah registrado el usuario con éxito','success','checkmark','bottom')
+});
   const uid = await this.firebaseauthservice.getUid();
   this.cliente.uid = uid;
   this.guardarUser();  
@@ -101,10 +113,11 @@ async guardarUser(){
   const res = await this.firestorageService.uploadImage(this.newFile, path, name);
   this.cliente.foto = res;
   }
-  this.firestoreService.createDoc(this.cliente, path, this.cliente.uid).then(res=>{
-    console.log('guardado con exito')
-  }).catch(error=>{
-  });
+  this.firestoreService.createDoc(this.cliente, path, this.cliente.uid).then(res =>{
+    this.presentToast('Guardado con éxito','success','checkmark','bottom')
+    
+  }).catch(error=>{this.presentToast('Compruebe los datos','danger','information-circle','bottom')
+});
 }
 
   async salir(){
@@ -128,8 +141,10 @@ async guardarUser(){
       password: this.cliente.password,
     }
     this.firebaseauthservice.login(credenciales.email, credenciales.password).then(res =>{
+      this.presentToast('Has iniciado sesión con éxito','success','checkmark','bottom')
       console.log('ingreso con exito')
-    })
+    }).catch(error=>{this.presentToast('Compruebe usuario y/o contraseña','danger','information-circle','bottom')
+  });
   }
   togglePassword(){
     if(this.paswordShow){

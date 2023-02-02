@@ -1,3 +1,4 @@
+import { NumericValueAccessor } from "@ionic/angular";
 import { type } from "os";
 
 export interface Producto{
@@ -31,5 +32,23 @@ export interface Pedido{
 export interface ProductoPedido{
     producto: Producto;
     cantidad: number;
+}
+export interface Peluquero{
+    
+    id: string;
+    nombre: string;
+    foto: string;
+}
+export interface Reserva{
+    nombre:string;
+    idUsuario:string;
+    dia: string;
+    turno: string;
+    telefono:string;
+    mail:string;
+    tipo:string;
+}
+export interface Hora{
+    turno:string;
 }
 export type EstadoPedido = 'enviado'|'visto'|'camino'|'entregado';

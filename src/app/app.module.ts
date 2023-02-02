@@ -14,6 +14,7 @@ import {AngularFirestoreModule} from '@angular/fire/compat/firestore';
 import {AngularFireStorageModule} from '@angular/fire/compat/storage';
 import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { ReactiveFormsModule } from '@angular/forms';
 
 
 
@@ -29,7 +30,8 @@ import { ServiceWorkerModule } from '@angular/service-worker';
   AngularFirestoreModule.enablePersistence(),
   AngularFireStorageModule,
   AngularFireAuthModule,
-  ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production})
+  ServiceWorkerModule.register('ngsw-worker.js', {enabled: environment.production}),
+  ReactiveFormsModule
 ],
   providers: [{ provide: RouteReuseStrategy, useClass: IonicRouteStrategy }],
   bootstrap: [AppComponent],

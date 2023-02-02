@@ -1,3 +1,7 @@
+import { ReservaConfirmadaComponent } from './pages/reserva-confirmada/reserva-confirmada.component';
+import { CalendarComponent } from './pages/calendar/calendar.component';
+import { PeluquerosComponent } from './backend/peluqueros/peluqueros.component';
+import { ReservaComponent } from './pages/reserva/reserva.component';
 import { PedidosComponent } from './pages/pedidos/pedidos.component';
 import { MispedidosComponent } from './pages/mispedidos/mispedidos.component';
 import { CarritoComponent } from './pages/carrito/carrito.component';
@@ -14,9 +18,13 @@ import { canActivate } from '@angular/fire/auth-guard';
 const routes: Routes = [
   {path: 'home',component:HomeComponent},
   {path: 'set-productos',component:SetProductosComponent}, //...canActivate(onlyAdmin )},
+  {path: 'peluqueros',component:PeluquerosComponent},
   {path: 'pedidos',component:PedidosComponent},
   {path: 'mis-pedidos',component:MispedidosComponent},
   {path: 'carrito',component:CarritoComponent},
+  {path: 'reserva',component:ReservaComponent},
+  {path: 'reserva-confirmada',component:ReservaConfirmadaComponent},
+  {path: 'calendar',component:CalendarComponent},
   {path: 'perfil',component:PerfilComponent},
   {path: 'perfil',component:HomeComponent},
   {

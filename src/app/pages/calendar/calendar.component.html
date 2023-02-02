@@ -1,0 +1,163 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitulo ion-text-wrap">
+      Reserva
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/']">
+        <ion-icon  slot="icon-only" name="storefront-sharp"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/perfil']">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+   <ion-grid>
+    <ion-row class="ion-justify-content-center">
+      <ion-col class="normal text-center borde" size="auto">
+        <ion-datetime #datetime class="centrar" [(ngModel)]="myDate" (ionChange)="showdate()"(click)="nuevo()"
+        color="medium"
+        presentation="date"
+        [isDateEnabled]="isWeekday"
+        value="2022-04-21"
+        [showDefaultTitle]="true"
+        [showDefaultButtons]="true"
+        doneText="Aceptar"
+        cancelText="Cancelar">
+        <ion-buttons slot="buttons" class="normal">
+          <ion-button color="danger" (click)="datetime.reset()">Cancelar</ion-button>
+          <ion-button color="dark" (click)="datetime.confirm()"id="open-modal">Confirmar</ion-button>
+        </ion-buttons>
+        <span class="subtitulo" slot="title">Reserve la cita</span>
+        <span slot="time-label">Hora</span>
+        </ion-datetime>
+      </ion-col>
+
+        <ion-modal trigger="open-modal" (willDismiss)="onWillDismiss($event)">
+          <ng-template>
+            <ion-header >
+              <ion-toolbar class="normal2">
+                <ion-buttons slot="start" class="subtitulo">
+                  <ion-button (click)="cancel()">Cancelar</ion-button>
+                </ion-buttons>
+                <ion-buttons slot="end">
+                    <ion-button [disabled]="Turno.invalid" (click)="confirm()" [strong]="true">Confirmar</ion-button>
+                </ion-buttons>
+              </ion-toolbar>
+            </ion-header>
+            <ion-content class="ion-padding">
+              <ion-item>
+                <ion-icon name="person-outline"></ion-icon>
+                <ion-input [(ngModel)]="newReserva.nombre"inputmode="text" disabled type="string"></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="today-outline"></ion-icon>
+                <ion-input [(ngModel)]="newReserva.dia"inputmode="text" type="string" disabled></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="phone-portrait-outline"position="floating"></ion-icon>
+                <ion-input [(ngModel)]="newReserva.telefono" type="number" placeholder="Telefono" inputmode="numerico" disabled></ion-input>
+              </ion-item>
+              <ion-item>
+                <ion-icon name="mail-outline" position="floating"></ion-icon>
+                <ion-input [(ngModel)]="newReserva.mail" type="email" placeholder="email" disabled></ion-input>
+              </ion-item>
+              <ion-list>
+                <form action="" [formGroup]="form">
+                  <ion-item >
+                    <ion-icon name="time-outline"></ion-icon>
+                    <ion-label> Seleccione horario</ion-label>
+                    <ion-select interface="popover" [(ngModel)]="newReserva.turno" formControlName="turno">
+                      <ion-select-option *ngFor="let hora of arrayTurnos" required minlength="1" maxlength="6" >
+                        <h2>{{hora.turno}}</h2>
+                      </ion-select-option>
+                    </ion-select>
+                  </ion-item>
+                </form>
+                <div *ngIf="Turno?.errors">
+                  <p *ngIf="Turno?.hasError('turno')" class="text-danger">Turno no disponible</p>
+                </div>
+                <ion-item>
+                  <ion-icon name="cut-outline"></ion-icon>
+                  <ion-label> Seleccione tipo de reserva</ion-label>
+                  <ion-select interface="popover"[(ngModel)]="newReserva.tipo">
+                    <ion-select-option value="corte">Corte</ion-select-option>
+                    <ion-select-option value="barba">Barba</ion-select-option>
+                    <ion-select-option value="corte y barba">Corte y barba</ion-select-option>
+                    <ion-select-option value="peinado">Peinado</ion-select-option>
+                    <ion-select-option value="coloracion">Coloracion</ion-select-option>
+                    <ion-select-option value="reflejos">Reflejos</ion-select-option>
+                  </ion-select>
+                </ion-item>
+              </ion-list>
+            </ion-content>
+          </ng-template>
+        </ion-modal>
+
+      <!-- <ion-col *ngIf="enableToHora">
+        <div class="card-body hora" (click)="cambiarColor()">
+          <h3 class="subtitulo p-2 encabezado2">Seleccione la hora a reservar</h3>
+          <div class="text-center" >
+            
+            <div class="row text-center mx-0">
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">09:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">09:30</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">10:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">10:30</div></div>
+            </div>
+   
+            <div class="row text-center mx-0">
+              
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">11:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">11:30</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">12:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">12:30</div></div>
+            </div>
+  
+            <div class="row text-center mx-0">
+
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">13:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">13:30</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">14:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">14:30</div></div>
+            </div>
+  
+            <div class="row text-center mx-0">
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">15:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">15:30</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">16:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">16:30</div></div>
+            </div>
+  
+            <div class="row text-center mx-0">
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">17:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">17:30</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">18:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">18:30</div></div>
+            </div>
+  
+            <div class="row text-center mx-0">
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">19:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">19:30</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">20:00</div></div>
+              <div class="col-sm-3 col-3 my-4 px-1"><div class="cell py-1">20:30</div></div>
+            </div>
+          </div>
+          < <ion-button class="boton-guardar" shape="round" expand="full" color="dark">Guardar</ion-button>
+        </div> 
+      </ion-col> -->
+    </ion-row>
+   </ion-grid>
+</ion-content>
+
+

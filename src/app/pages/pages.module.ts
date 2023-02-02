@@ -1,8 +1,11 @@
+import { ReservaConfirmadaComponent } from './reserva-confirmada/reserva-confirmada.component';
+import { CalendarComponent } from './calendar/calendar.component';
+import { ReservaComponent } from './reserva/reserva.component';
 import { PedidosComponent } from './pedidos/pedidos.component';
 import { MispedidosComponent } from './mispedidos/mispedidos.component';
 import { CarritoComponent } from './carrito/carrito.component';
 import { ComponentsModule } from './../components/components.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { PerfilComponent } from './perfil/perfil.component';
 import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
@@ -18,7 +21,10 @@ import { HomeComponent } from './home/home.component';
     PerfilComponent,
     CarritoComponent,
     MispedidosComponent,
-    PedidosComponent
+    PedidosComponent,
+    ReservaComponent,
+    CalendarComponent, 
+    ReservaConfirmadaComponent
   ],
   imports: [
     CommonModule,
@@ -26,6 +32,7 @@ import { HomeComponent } from './home/home.component';
     RouterModule,
     FormsModule,
     ComponentsModule,
+    ReactiveFormsModule
   ]
 })
 export class PagesModule { }

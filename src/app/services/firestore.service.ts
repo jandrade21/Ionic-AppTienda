@@ -36,6 +36,7 @@ export class FirestoreService {
   getCollectionQuery<tipo>(path:string, parametro: string, condicion:any, busqueda: string){
     const collection = this.database.collection<tipo>(path, 
        ref => ref.where(parametro, condicion, busqueda));
+          
     return collection.valueChanges();
   }
   getCollectionAll<tipo>(path, parametro: string, condicion: any, busqueda: string, startAt: any){
@@ -50,4 +51,10 @@ export class FirestoreService {
          );
       return collection.valueChanges(); 
   }
+  getCollectionQuery2<tipo>(path:string, parametro: string, condicion:any, busqueda: string){
+    const collection = this.database.collection<tipo>(path, 
+       ref => ref.where(parametro, condicion, busqueda)
+       .orderBy('turno', 'asc')
+       );
+      }   
 }

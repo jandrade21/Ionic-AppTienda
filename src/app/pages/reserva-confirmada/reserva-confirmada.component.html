@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitulo ion-text-wrap">
+      Reserva
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/']">
+        <ion-icon  slot="icon-only" name="storefront-sharp"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/perfil']">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="m-3">
+    <ion-segment mode="ios" (ionChange)="changeSegment($event)" value="diactual">
+      <ion-segment-button value="diactual">
+        <ion-label class="normal">Reservas del dia</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="todas">
+        <ion-label class="normal">Todas las reservas</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+
+<ion-grid>
+  <ion-row class="ion-justify-content-center" >
+    <ion-col  size="8" *ngFor="let reserva of reserva"size-lg="4">
+      <ion-card>
+        <ion-card-header>
+          <ion-item>
+          <ion-avatar slot="start" >
+            <img alt="Silhouette of a person's head" src="https://ionicframework.com/docs/img/demos/avatar.svg" />
+          </ion-avatar>
+          <ion-card-title slot="start">{{reserva.nombre}}</ion-card-title>
+        </ion-item>
+        </ion-card-header>
+
+        <ion-card-content>
+          <p>Fecha: {{reserva.dia}}</p>
+          <p>Hora: {{reserva.turno}}</p>
+          <p>Tipo de Reserva: {{reserva.tipo}}</p>
+        </ion-card-content>
+      </ion-card>
+    </ion-col>
+   </ion-row>
+</ion-grid>
+
+</ion-content>

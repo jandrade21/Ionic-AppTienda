@@ -1,0 +1,29 @@
+
+  .cell {
+    background: #adf48eef;
+    border: 1px solid #363434;
+    cursor: pointer;
+    border-radius: 15px;
+    font-size: small;
+  }
+  .cell:hover{
+    background: #606169;
+    color: #ffffff;
+  }
+  .hora{
+    margin: 20px;
+    padding: 10px;
+    font-weight: bold;
+}
+.normal2{
+    font-family: 'Raleway', sans-serif !important;
+    font-size: 14px !important;
+    color: #ffffff !important;
+}
+.encabezado2{
+  background:#e9ecef;
+  border-radius: 30px;
+  margin: 10px;
+  text-align: center;
+  padding: 5px;
+}

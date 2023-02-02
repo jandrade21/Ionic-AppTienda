@@ -14,8 +14,7 @@
       <div  class="centrar">
         <img src="assets/imagen/logo.png" alt="logo">
       </div>
-      <div *ngIf="!uid.length" >
-        <!-- <h3 class="subtitulo p-3 encabezado">Ingrese tus datos</h3> -->
+      <div *ngIf="!uid.length">
         <ion-item>
           <ion-label class="normal"position="floating">
             Email
@@ -87,7 +86,7 @@
         <ion-grid>
           <ion-row class="ion-justify-content-center">
             <ion-col class="normal text-center borde" size="6">
-              <ion-button *ngIf="ingresarEnable" (click)="ingresar()" class="boton-guardar" shape="round" expand="full" color="dark" (click)="ingresar()">Ingresar</ion-button> 
+              <ion-button action="#" *ngIf="ingresarEnable" (click)="ingresar()" class="boton-guardar" shape="round" expand="full" color="dark" (click)="ingresar()">Ingresar</ion-button> 
             </ion-col>
             <ion-col class="normal text-center" size="6">
               <ion-button *ngIf="ingresarEnable" (click)="ingresarEnable = false" class="boton-guardar" shape="round" expand="full" color="dark" (click)="registrarse()">Registrarse</ion-button>  
