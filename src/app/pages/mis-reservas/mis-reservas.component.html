@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitulo ion-text-wrap">
+      Mis Reservas
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/carrito']">
+        <ion-icon slot="icon-only" name="cart-sharp"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/perfil']">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div *ngIf="reservasDelCliente.length > 0" size="12">
+      <div *ngFor="let reserva of reservasDelCliente">
+        <div class="reserva" class="container">
+          <ion-card>
+            <ion-card-header>
+              <ion-card-title>Fecha: {{ reserva.dia }}</ion-card-title>
+            </ion-card-header>
+            <ion-card-content>Horario: {{ reserva.turno }}</ion-card-content>
+            <ion-card-content>Tipo de Reserva: {{reserva.tipo}} </ion-card-content>
+          </ion-card>
+        </div>
+        <div class="container">
+          <ion-button (click)="deleteReserva(reserva)" color="dark" class="small" class="centered-card">
+            Cancelar Reserva
+            <ion-icon slot="end" color="danger" name="trash-bin"></ion-icon>
+          </ion-button>
+        </div>
+      </div>
+  </div>
+  <div *ngIf="reservasDelCliente.length === 0">
+    <p>No se encontraron reservas para este cliente.</p>
+  </div>
+  
+
+</ion-content>

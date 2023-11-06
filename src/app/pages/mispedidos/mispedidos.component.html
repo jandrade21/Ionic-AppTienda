@@ -1,0 +1,48 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitulo ion-text-wrap">
+      Mis pedidos
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/']">
+        <ion-icon  slot="icon-only" name="storefront-sharp"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/perfil']">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+  <div class="m-3">
+    <ion-segment mode="ios" (ionChange)="changeSegment($event)" value="nuevos">
+      <ion-segment-button value="nuevos">
+        <ion-label class="normal">Nuevos</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="entregado">
+        <ion-label class="normal">Entregados</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+  </div>
+ 
+  <ion-card *ngFor="let pedido of pedidos">
+    <ion-item>
+      <ion-label class="normal">
+        Estado:{{pedido.estado}}
+        <p>
+          Fecha: {{pedido.fecha.seconds*1000|date:'dd/MM/yyy'}}
+        </p> 
+      </ion-label>
+    </ion-item>
+    <app-itemcarrito *ngFor="let producto of pedido.productos" [productoPedido]="producto" [botones]=false></app-itemcarrito>
+  </ion-card>
+</ion-content>

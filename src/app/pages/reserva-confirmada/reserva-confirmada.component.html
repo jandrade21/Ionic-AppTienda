@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitulo ion-text-wrap">
+      Reservas Confirmadas
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon slot="icon-only" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+    <ion-buttons slot="end">
+      <ion-button [routerLink]="['/']">
+        <ion-icon  slot="icon-only" name="storefront-sharp"></ion-icon>
+      </ion-button>
+      <ion-button [routerLink]="['/perfil']">
+        <ion-icon slot="icon-only" name="person-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <ion-grid [fixed]="true">
+    <ion-row>
+      <ion-col class="centered-card">
+        <ion-card *ngFor="let profesional of peluquero" (click)="seleccionarProfesional(profesional.id)" class="mi-card">
+          <ion-card-header class="mi-card">
+            <img alt="Silhouette of mountains" src="{{profesional.foto}}" />
+            <ion-card-title class="centered-card" >{{profesional.nombre}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+          </ion-card-content>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+  <ion-segment mode="ios" *ngIf="capturaDeProfesional" (ionChange)="changeSegment($event)" value="turnosDia">
+    <ion-segment-button value="turnosDia">
+      <ion-label class="segment-letra">TURNOS DEL DÍA</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="turnosTotales">
+      <ion-label class="segment-letra">TOTAL DE TURNOS</ion-label>
+    </ion-segment-button>
+  </ion-segment>
+  <ion-grid>
+    <ion-row  >
+      <ion-col  size="auto" *ngFor="let reserva of reservasMostradas"size-lg="auto">
+        <ion-card>
+          <ion-card-header>
+            <ion-card-title slot="start">{{reserva.nombre}}</ion-card-title>
+          </ion-card-header>
+          <ion-card-content>
+            <p>Fecha: {{reserva.dia}}</p>
+            <p>Hora: {{reserva.turno}}</p>
+            <p>Tipo de Reserva:{{reserva.tipo}}</p>
+          </ion-card-content>
+        </ion-card>
+        <ion-button (click)="deleteReserva(reserva)" color="dark"  class="centered-card" size="small">
+          Cancelar Turno
+          <ion-icon slot="end" color="danger" name="trash-bin"></ion-icon>
+        </ion-button>
+      </ion-col>
+     </ion-row>
+  </ion-grid>
+</ion-content>

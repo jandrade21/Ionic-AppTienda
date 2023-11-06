@@ -1,0 +1,18 @@
+<ion-grid>
+  <ion-row class="ion-justify-content-center">
+    <ion-col size-lg="auto"class="normal text-center borde" size-sm="5">
+      <ion-card class="card">
+        <ion-card-header>
+          <ion-card-title>{{peluquero.nombre}}</ion-card-title>
+        </ion-card-header>
+        <ion-card-content>
+          <img alt="" src="{{peluquero.foto}}" />
+        </ion-card-content>
+        <div class="normal centrar">
+          <ion-button  size="large" class="enviar" color="dark" [routerLink]="['/calendar', peluquero.id]">
+            <ion-icon slot="end" name="calendar-outline"></ion-icon> Reservar</ion-button>
+        </div>
+      </ion-card>
+    </ion-col>
+  </ion-row>
+</ion-grid>

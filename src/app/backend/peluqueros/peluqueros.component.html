@@ -1,0 +1,65 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-title class="subtitulo ion-text-wrap">
+      Configuración de peluqueros
+    </ion-title>
+    <ion-buttons slot="start">
+      <ion-button (click)="openMenu()">
+        <ion-icon  slot="icon-only" name="menu-sharp"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+<ion-content>
+  <div class="nuevo">
+    <ion-button (click)="nuevo()" class="normal" shape="round" color="dark">nuevo</ion-button>
+  </div>
+  <div *ngIf="enableNewPeluquero">
+    <div class="normal centrar">
+      <ion-button (click)="enableNewPeluquero = false;" shape="round" color="dark">
+        <ion-icon slot="end" name="close-sharp"></ion-icon>
+        Cerrar
+      </ion-button>
+  </div>
+    <h3 class="subtitulo p-3 encabezado">Ingrese datos del peluquero</h3>
+    <ion-item>
+      <ion-label class="normal"position="floating">
+        Nombre
+      </ion-label>
+        <ion-input [(ngModel)]="newPelu.nombre" class="normal" type="string" inputmode="text">
+        </ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label class="normal">
+        Foto:
+      </ion-label>
+        <ion-buttons slot="end">
+          <ion-button>
+            <label for="file-upload">
+              <ion-icon slot="icon-only" name="images"></ion-icon>
+            </label>
+            <input (change)="newImageUpload($event)" type="file" id="file-upload" style="display:none" accept="image/*">  
+            </ion-button>
+          </ion-buttons>
+    </ion-item>
+    <ion-item>
+      <img class="image"  [src]="newPelu.foto" alt="">
+    </ion-item>
+    <ion-button class="boton-guardar" shape="round" expand="full" color="dark" (click)="guardarPeluquero()">Guardar</ion-button>
+  </div>
+
+  <ion-card name="card">
+    <h3 class="subtitulo p-3 encabezado">Lista de peluqueros</h3>
+    <ion-item *ngFor="let pelu of peluquero">
+      <ion-label class="normal">{{pelu.nombre}}</ion-label>
+      <ion-buttons slot="end">
+        <ion-button (click)="newPelu = pelu; enableNewPeluquero=true;">
+          <ion-icon slot="icon-only" name="create-sharp"></ion-icon>
+        </ion-button>
+        <ion-button (click)="deletePeluquero(pelu)">
+          <ion-icon slot="icon-only" color="danger" name="trash-bin"></ion-icon>
+        </ion-button>
+      </ion-buttons>
+    </ion-item>
+  </ion-card>  
+</ion-content>
